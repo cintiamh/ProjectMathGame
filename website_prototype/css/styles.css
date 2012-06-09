@@ -1,0 +1,152 @@
+body, header, #main, footer {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Verdana;
+    font-size: 0.9em;
+    color: #333333;
+}
+
+header, nav, #main, #ads_menu, #sub_footer, footer {
+    display: block;
+    position: relative;
+    float: left;
+}
+
+body {
+
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    background-color: #FE7701;
+}
+
+#header_content {
+    width: 800px;
+    margin: 0px auto;
+}
+
+.header_letter1, .header_letter2, .header_letter3 {
+    font-family: "Sniglet";
+    font-size: 70px;
+    text-shadow: -3px 0 white, 0 3px white, 3px 0 white, 0 -3px white;
+    margin: 10px 0 0 0;
+    display: block;
+    position: relative;
+    float: left;
+}
+
+.header_letter1 {
+    color: red;
+}
+
+.header_letter2 {
+    color: green;
+}
+
+.header_letter3 {
+    color: blue;
+}
+
+#header_content h1 {
+
+}
+
+#login_link {
+    display: block;
+    position: relative;
+    float: right;
+    padding: 10px 0;
+    color: #ffffff;
+}
+
+#login_link a {
+    color: #ffffff;
+}
+
+nav {
+    width: 100%;
+    background-color: #90D500;
+}
+
+#nav_content {
+    width: 800px;
+    display: block;
+    margin: 20px auto;
+}
+
+#main {
+    width: 100%;
+    background-color: #007FD8;
+}
+
+#game_window {
+    width: 760px;
+    min-height: 500px;
+    display: block;
+    background-color: #FFFFFF;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+#ads_menu {
+    width: 100%;
+    background-color: #FE7701;
+}
+
+#ads_content {
+    width: 820px;
+    display: block;
+    margin: 20px auto;
+}
+
+.big_ad, .small_ad {
+    display: block;
+    margin: 10px;
+    position: relative;
+    background-color: #FFFFFF;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.big_ad {
+    width: 400px;
+    height: 240px;
+    float: right;
+}
+
+.small_ad {
+    width: 110px;
+    height: 110px;
+    float: left;
+}
+
+#sub_footer {
+    width: 100%;
+    height: 50px;
+    background-color: #FFED1B;
+}
+
+footer {
+    width: 100%;
+    background-color: #90D500;
+}
+
+#footer_content {
+    width: 800px;
+    display: block;
+    margin: 20px auto;
+}
+
+.green_button {
+    background-color: #C0E538;
+    color: #5D7922;
+    font-family: "Comic Sans MS";
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
