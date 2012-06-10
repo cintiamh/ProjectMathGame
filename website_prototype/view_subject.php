@@ -11,15 +11,15 @@ include 'modules/header.php';
 		
 include 'modules/connect_db.php';
 
-$query = "SELECT * FROM subjects WHERE id = '$subject_id';";
-$result = mysql_query($query);
+$subjectQuery = "SELECT * FROM subjects WHERE id = '$subject_id';";
+$subjectResult = mysql_query($subjectQuery);
 	
-if (mysql_num_rows($result) < 1) {
+if (mysql_num_rows($subjectResult) < 1) {
 	header('Location: subjects.php');
 	//die("User doesn't exist.");
 }
 	
-$userData = mysql_fetch_array($result, MYSQL_ASSOC);
+$subjectData = mysql_fetch_array($subjectResult, MYSQL_ASSOC);
 //mysql_free_result($result);
 
 ?>
@@ -34,11 +34,11 @@ $userData = mysql_fetch_array($result, MYSQL_ASSOC);
 <table>
 	<tr>
 		<td>Name/Title:</td>
-		<td><?= $userData['name'] ?></td>
+		<td><?= $subjectData['name'] ?></td>
 	</tr>
 	<tr>
 		<td>Code:</td>
-		<td><?= $userData['code'] ?></td>
+		<td><?= $subjectData['code'] ?></td>
 	</tr>
 </table>
 
@@ -48,24 +48,22 @@ $userData = mysql_fetch_array($result, MYSQL_ASSOC);
 $query2 = "SELECT * FROM categories WHERE subject_id = '$subject_id';";
 $result2 = mysql_query($query2);
 
-$userData2 = mysql_fetch_array($result2, MYSQL_ASSOC);
-
 if (mysql_num_rows($result2) < 1) {
 	echo "There are no categories for this subject.";
 }
 else {
 	$i = 0;
-	print_r(mysql_fetch_row($result2));
 	print "<table class='listing'>";
 	
 	while(($row = mysql_fetch_row($result2)) !== false) {
-		echo "after printing";
-		print_r($row);
 		$i++;
 		print "<tr class=\"d".($i & 1)."\">";
 		print "<td>".$row[1]."</td>";
 		print "<td>".$row[2]."</td>";
 		print "<td><a href='view_category.php?subject_id=$subject_id&category_id=".$row[0]."'>View</a></td>";
+		//print "<td><a href='edit_category.php?subject_id=$subject_id&cateogry_id=".$row[0]."'>Edit</a></td>";
+		//print "<td><a href='delete_category.php?subject_id=$subject_id&category_id=".$row[0]."'>Delete</a></td>";
+		//print "<td><a href='view_category.php?category_id=".$row[0]."'>View</a></td>";
 		print "<td><a href='edit_category.php?subject_id=$subject_id&cateogry_id=".$row[0]."'>Edit</a></td>";
 		print "<td><a href='delete_category.php?subject_id=$subject_id&category_id=".$row[0]."'>Delete</a></td>";
 		print "</tr>\n";

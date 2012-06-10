@@ -51,7 +51,6 @@ include('modules/connect_db.php');
 // check if the form has been submitted. If it has, process the form and save it to the database
 if (isset($_POST['id']))
 {
-	echo "post version";
 	// confirm that the 'id' value is a valid integer before getting the form data
 	if (is_numeric($_POST['id']))
 	{

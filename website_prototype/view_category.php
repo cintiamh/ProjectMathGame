@@ -1,30 +1,45 @@
 <?PHP
 
-if (!isset($_GET['category_id']) || is_null($_GET['category_id']) || !is_numeric($_GET['category_id'])) {
+if (!isset($_GET['subject_id']) || is_null($_GET['subject_id']) || !is_numeric($_GET['subject_id'])) {
 	header("Location: subjects.php");
 }
 
 $subject_id = $_GET['subject_id'];
 
+if (!isset($_GET['category_id']) || is_null($_GET['category_id']) || !is_numeric($_GET['category_id'])) {
+	header("Location: view_subject.php?subject_id=".$subject_id);
+}
 
-include 'modules/header.php';
+$category_id = $_GET['category_id'];
 		
 include 'modules/connect_db.php';
 
-$query = "SELECT * FROM categories WHERE id = 'category_id';";
-$result = mysql_query($query);
+// Check if subject exists
+$subjectQuery = "SELECT * FROM subjects WHERE id = '$subject_id';";
+$subjectResult = mysql_query($subjectQuery);
 	
-if (mysql_num_rows($result) < 1) {
+if (mysql_num_rows($subjectResult) < 1) {
 	header('Location: subjects.php');
+	//die("User doesn't exist.");
+} 
+
+// Check if category exists
+$categoryQuery = "SELECT * FROM categories WHERE id='$category_id';";
+$categoryResult = mysql_query($categoryQuery);
+	
+if (mysql_num_rows($categoryResult) < 1) {
+	header("Location: view_subject.php?subject_id=".$subject_id);
 }
 	
-$userData = mysql_fetch_array($result, MYSQL_ASSOC);
+$userData = mysql_fetch_array($categoryResult, MYSQL_ASSOC);
 
+include 'modules/header.php';
 ?>
 
 <p>
 	<a href="subjects.php">Subjects</a> ->
-	View Subject
+	<a href="view_subject.php?subject_id=<?= $subject_id ?>">View Subject</a> ->
+	View Category
 </p>
 
 <h1>Category</h1>
@@ -40,36 +55,40 @@ $userData = mysql_fetch_array($result, MYSQL_ASSOC);
 	</tr>
 </table>
 
-<h2>Categories</h2>
+<h2>Questions</h2>
 
 <?PHP
-/*$query = "SELECT * FROM categories WHERE subject_id = '$subject_id';";
-$result = mysql_query($query);
+$questionQuery = "SELECT * FROM questions WHERE category_id = '$category_id';";
+$questionResult = mysql_query($questionQuery);
 
-$userData = mysql_fetch_array($result, MYSQL_ASSOC);
+$questionData = mysql_fetch_array($questionResult, MYSQL_ASSOC);
 
-if (mysql_num_rows($result) < 1) {
-	echo "There are no categories for this subject.";
+if (mysql_num_rows($questionResult) < 1) {
+	echo "There are no questions for this category.";
 }
 else {
 	$i = 0;
-	print "<table>";
-	while(($row = mysql_fetch_row($result)) !== false) {
+	print "<table class='listing'>";
+	
+	while(($row = mysql_fetch_row($questionResult)) !== false) {
 		$i++;
 		print "<tr class=\"d".($i & 1)."\">";
-		print "<td>".$row[0]."</td>";
 		print "<td>".$row[1]."</td>";
+		print "<td>".$row[2]."</td>";
+		print "<td><a href='view_question.php?category_id=$category_id&question_id=".$row[0]."'>View</a></td>";
+		print "<td><a href='edit_question.php?cateogry_id=$category_id&question_id=".$row[0]."'>Edit</a></td>";
+		print "<td><a href='delete_question.php?category_id=$category_id&question_id=".$row[0]."'>Delete</a></td>";
 		print "</tr>\n";
 	}
-	mysql_free_result($result);
-	print "</table>";	
-}*/
+	mysql_free_result($questionResult);
+	print "</table>";
+}
 
 mysql_close();
 
 ?>
 <p>
-	<a href="new_category.php?subject_id=<?= $subject_id ?>">New</a>
+	<a href="new_question.php?category_id=<?= $category_id ?>">New</a>
 </p>
 
 
