@@ -7,6 +7,7 @@ table, tr, td {
 .listing {
 	width: 100%;
 	border: 1px solid #ccc;
+	border-collapse: collapse;
 }
 
 .d1 {

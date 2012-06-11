@@ -61,11 +61,8 @@ else {
 		print "<td>".$row[1]."</td>";
 		print "<td>".$row[2]."</td>";
 		print "<td><a href='view_category.php?subject_id=$subject_id&category_id=".$row[0]."'>View</a></td>";
-		//print "<td><a href='edit_category.php?subject_id=$subject_id&cateogry_id=".$row[0]."'>Edit</a></td>";
-		//print "<td><a href='delete_category.php?subject_id=$subject_id&category_id=".$row[0]."'>Delete</a></td>";
-		//print "<td><a href='view_category.php?category_id=".$row[0]."'>View</a></td>";
-		print "<td><a href='edit_category.php?subject_id=$subject_id&cateogry_id=".$row[0]."'>Edit</a></td>";
-		print "<td><a href='delete_category.php?subject_id=$subject_id&category_id=".$row[0]."'>Delete</a></td>";
+		print "<td><a href='edit_category.php?id=".$row[0]."'>Edit</a></td>";
+		print "<td><a href='delete_category.php?id=".$row[0]."'>Delete</a></td>";
 		print "</tr>\n";
 	}
 	mysql_free_result($result2);
