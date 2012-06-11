@@ -61,8 +61,6 @@ include 'modules/header.php';
 $questionQuery = "SELECT * FROM questions WHERE category_id = '$category_id';";
 $questionResult = mysql_query($questionQuery);
 
-$questionData = mysql_fetch_array($questionResult, MYSQL_ASSOC);
-
 if (mysql_num_rows($questionResult) < 1) {
 	echo "There are no questions for this category.";
 }
@@ -70,14 +68,23 @@ else {
 	$i = 0;
 	print "<table class='listing'>";
 	
-	while(($row = mysql_fetch_row($questionResult)) !== false) {
+	while(($row = mysql_fetch_array($questionResult)) !== false) {
 		$i++;
 		print "<tr class=\"d".($i & 1)."\">";
-		print "<td>".$row[1]."</td>";
-		print "<td>".$row[2]."</td>";
-		print "<td><a href='view_question.php?category_id=$category_id&question_id=".$row[0]."'>View</a></td>";
-		print "<td><a href='edit_question.php?cateogry_id=$category_id&question_id=".$row[0]."'>Edit</a></td>";
-		print "<td><a href='delete_question.php?category_id=$category_id&question_id=".$row[0]."'>Delete</a></td>";
+		print "<td>";
+		$questionStr = $row['question'];
+		if (strlen($questionStr) > 150) 
+		{
+    		$questionStr = wordwrap($questionStr, 150);
+    		$questionStr = substr($questionStr, 0, strpos($questionStr, "\n"));
+		}
+		print $questionStr;
+		print "</td>";
+		print "<td>".$row['grade']."</td>";
+		print "<td>".$row['level']."</td>";
+		print "<td><a href='view_question.php?id=".$row[0]."'>View</a></td>";
+		print "<td><a href='edit_question.php?id=".$row[0]."'>Edit</a></td>";
+		print "<td><a href='delete_question.php?id=".$row[0]."'>Delete</a></td>";
 		print "</tr>\n";
 	}
 	mysql_free_result($questionResult);
@@ -88,7 +95,7 @@ mysql_close();
 
 ?>
 <p>
-	<a href="new_question.php?category_id=<?= $category_id ?>">New</a>
+	<a href="new_question.php?id=<?= $category_id ?>">New</a>
 </p>
 
 
