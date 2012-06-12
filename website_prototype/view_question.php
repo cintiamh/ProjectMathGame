@@ -62,9 +62,8 @@ else {
 		print "<tr class=\"d".($i & 1)."\">";
 		print "<td>".$row['answer']."</td>";
 		print "<td>".$row['correct']."</td>";
-		print "<td><a href='view_question.php?category_id=$category_id&question_id=".$row[0]."'>View</a></td>";
-		print "<td><a href='edit_question.php?cateogry_id=$category_id&question_id=".$row[0]."'>Edit</a></td>";
-		print "<td><a href='delete_question.php?category_id=$category_id&question_id=".$row[0]."'>Delete</a></td>";
+		print "<td><a href='edit_option.php?id=".$row[0]."'>Edit</a></td>";
+		print "<td><a href='delete_option.php?id=".$row[0]."'>Delete</a></td>";
 		print "</tr>\n";
 	}
 	mysql_free_result($optionResult);

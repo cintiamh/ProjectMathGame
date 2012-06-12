@@ -4,11 +4,11 @@ NEW.PHP
 Allows user to create a new entry in the database
 */
 include 'modules/connect_db.php';
-include 'modules/retrieve_category_subject_id.php';
+include 'modules/retrieve_question_ids.php';
 
 // creates the new record form
 // since this form is used multiple times in this file, I have made it a function that is easily reusable
-function renderForm($question, $grade, $level, $active, $explanation, $category_id, $subject_id, $error)
+function renderForm($answer, $correct, $question_id, $category_id, $subject_id, $error)
 {
 	include 'modules/header.php';
 	
@@ -17,7 +17,8 @@ function renderForm($question, $grade, $level, $active, $explanation, $category_
 		<a href="subjects.php">Subjects</a> -> 
 		<a href="view_subject.php?subject_id=<?= $subject_id ?>">View Subject</a> ->
 		<a href="view_category.php?subject_id=<?= $subject_id ?>&category_id=<?= $category_id ?>">View Category</a> ->
-		New Question
+		<a href="view_question.php?id=<?= $question_id ?>">View Question</a> ->
+		New Option
 	</p>
 	
 	<?php // if there are any errors, display them
@@ -26,29 +27,18 @@ function renderForm($question, $grade, $level, $active, $explanation, $category_
 	}
 	?>
 	
-	<h1>New Question</h1>
+	<h1>New Option</h1>
 	
 	<form name="question" action="" method="post">
-		<input type="hidden" name="category_id" value="<?= $category_id ?>" />
-		<input type="hidden" name="subject_id" value="<?= $subject_id ?>" />
+		<input type="text" name="question_id" value="<?= $question_id ?>" />
+		<input type="text" name="category_id" value="<?= $category_id ?>" />
+		<input type="text" name="subject_id" value="<?= $subject_id ?>" />
 		<p>
-			Question:<br />
-			<textarea name="question" cols="100" rows="10"><?= $question ?></textarea>
+			<b>Answer:</b><br />
+			<textarea name="answer" cols="100" rows="10"><?= $answer ?></textarea>
 		</p>
 		<p>
-			Grade:<br />
-			<input type="number" name="grade" value="<?= $grade ?>" />
-		</p>
-		<p>
-			Level:<br />
-			<input type="number" name="level" value="<?= $level ?>" />
-		</p>
-		<p>
-			<input type="checkbox" name="active" value="active" <?php if ($active) echo "checked" ?>/> Active
-		</p>
-		<p>
-			Explanation:<br />
-			<textarea name="explanation" cols="100" rows="10"><?= $explanation ?></textarea>
+			<input type="checkbox" name="correct" value="correct" <?php if ($correct) echo "checked" ?>/> Active
 		</p>
 		<p>
 			<input type="submit" value="Submit" />
@@ -60,40 +50,37 @@ function renderForm($question, $grade, $level, $active, $explanation, $category_
 }
 
 // check if the form has been submitted. If it has, start to process the form and save it to the database
-if (isset($_POST['question'])) {
+if (isset($_POST['answer'])) {
 	
 	// get form data, making sure it is valid
-	$question = mysql_real_escape_string(htmlspecialchars($_POST['question']));
-	$explanation = mysql_real_escape_string(htmlspecialchars($_POST['explanation']));
-	$grade = $_POST['grade'];
-	$level = $_POST['level'];
-	if ($_POST['active'] == "active") {
-		$active = true;
+	$answer = mysql_real_escape_string(htmlspecialchars($_POST['answer']));
+	$correct = false;
+	if ($_POST['correct'] == "correct") {
+		$correct = true;
 	}
-	else {
-		$active = false;
-	}
+	$question_id = $_POST['question_id'];
 	$category_id = $_POST['category_id'];
 	$subject_id = $_POST['subject_id'];
 
 	// check to make sure both fields are entered
-	if ($question == '') {
+	if ($answer == '') {
 		// generate error message
 		$error = 'ERROR: Please fill in all required fields!';
 		// if either field is blank, display the form again
-		renderForm($question, $grade, $level, $active, $explanation, $category_id, $subject_id, $error);
+		renderForm($answer, $correct, $question_id, $category_id, $subject_id, $error);
 	} else {
 		// save the data to the database
 		//$insert_query = "INSERT questions SET question='$question' grade=$grade level=$level active=$active explanation='$explanation' category_id='$category_id'";
-		$insert_query = "INSERT INTO questions (question, grade, level, active, explanation, category_id) VALUES ('$question', $grade, $level, '$active', '$explanation', $category_id)"; 
+		$insert_query = "INSERT INTO options (answer, correct, question_id) VALUES ('$answer', '$correct', $question_id)"; 
+		//echo $insert_query;
 		mysql_query($insert_query) or die(mysql_error());
 
 		// once saved, redirect back to the view page
-		header("Location: view_category.php?subject_id=$subject_id&category_id=" . $category_id);
+		header("Location: view_question.php?id=" . $question_id);
 	}
 } else
 // if the form hasn't been submitted, display the form
 {
-	renderForm('', '', '', '', '', $category_id, $subject_id, '');
+	renderForm('', true, $question_id, $category_id, $subject_id, '');
 }
 ?> 
