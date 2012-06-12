@@ -53,7 +53,7 @@ if (isset($_SESSION['username'])) {
   <div id="nav_content">
   	<a href="#" class="green_button">Activities</a>
   	<a href="subjects.php" class="green_button">Subjects</a>
-  	<a href="#" class="green_button">Schools</a>
+  	<a href="schools.php" class="green_button">Schools</a>
   	<a href="#" class="green_button">Users</a>
   </div>
 </nav>
