@@ -50,7 +50,6 @@ else {
 		print "<tr class=\"d".($i & 1)."\">";
 		print "<td>".$row["grade"]."</td>";
 		print "<td>".$row["code"]."</td>";
-		print "<td><a href='view_group.php?id=".$row["id"]."'>View</a></td>";
 		print "<td><a href='edit_group.php?id=".$row["id"]."'>Edit</a></td>";
 		print "<td><a href='delete_group.php?id=".$row["id"]."'>Delete</a></td>";
 		print "</tr>\n";
