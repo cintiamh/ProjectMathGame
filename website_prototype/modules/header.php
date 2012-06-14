@@ -51,10 +51,9 @@ if (isset($_SESSION['username'])) {
 </header>
 <nav>
   <div id="nav_content">
-  	<a href="#" class="green_button">Activities</a>
   	<a href="subjects.php" class="green_button">Subjects</a>
   	<a href="schools.php" class="green_button">Schools</a>
-  	<a href="#" class="green_button">Users</a>
+  	<a href="users.php" class="green_button">Users</a>
   </div>
 </nav>
 <div id="main">

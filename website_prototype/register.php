@@ -27,7 +27,6 @@ if (strlen($email) <= 0 || strlen($email) > 50) {
 }
 
 // Hashing
-echo "pass1: ".$pass1."\n";
 $hash = hash('sha256', $pass1);
 
 // create a 3 character sequence
@@ -36,16 +35,14 @@ function createSalt() {
 	return substr($string, 0, 3);
 }
 $salt = createSalt();
-echo "salt: ".$salt."\n";
 $hash = hash('sha256', $salt . $hash);
-echo "hash: ".$hash."\n";
 
 include 'modules/connect_db.php';
 
 $query = "INSERT INTO users (name, email, username, password, salt, role) VALUES ('".$name."', '".$email."', '".$username."', '".$hash."', '".$salt."', '".$role."');";
 
 if (mysql_query($query, $conn)) {
-	echo "You were successfully registered.";
+	//echo "You were successfully registered.";
 }
 else {
 	echo mysql_errno($conn). ": " . mysql_error($conn);
