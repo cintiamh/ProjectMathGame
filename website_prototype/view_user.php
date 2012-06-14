@@ -44,9 +44,42 @@ include 'modules/header.php';
 	</tr>
 </table>
 
+<h2>Activities</h2>
+
 <?PHP
+$activityQuery = "SELECT * FROM activities WHERE user_id = '$id';";
+$activityResult = mysql_query($activityQuery);
+
+if (mysql_num_rows($activityResult) < 1) {
+	echo "There are no activities for this user.";
+}
+else {
+	$i = 0;
+	print "<table class='listing'>";
+	
+	while(($row = mysql_fetch_array($activityResult)) !== false) {
+		$i++;
+		print "<tr class=\"d".($i & 1)."\">";
+		print "<td>".$row["success"]."</td>";
+		print "<td>".$row["start_time"]."</td>";
+		print "<td>".$row["end_time"]."</td>";
+		print "<td>".$row["question_id"]."</td>";
+		print "<td><a href='view_activity.php?id=".$row["id"]."'>View</a></td>";
+		print "<td><a href='edit_activity.php?id=".$row["id"]."'>Edit</a></td>";
+		print "<td><a href='delete_activity.php?id=".$row["id"]."'>Delete</a></td>";
+		print "</tr>\n";
+	}
+	mysql_free_result($groupsResult);
+	print "</table>";	
+}
 
 mysql_close();
 
+?>
+<p>
+	<a href="new_activity.php?id=<?= $id ?>">New Activity</a>
+</p>
+
+<?PHP
 include 'modules/footer.php';
 ?>
