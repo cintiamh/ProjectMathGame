@@ -96,7 +96,7 @@ if (isset($_POST['name']))
 else
 // if the form hasn't been submitted, display the form
 {
-	renderForm($name, $address, $city, $state, $error);
+	renderForm('', '', '', '', '');
 }
 ?>
 

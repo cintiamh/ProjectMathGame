@@ -21,14 +21,15 @@ if (!$userRow) {
 
 // creates the edit record form
 // since this form is used multiple times in this file, I have made it a function that is easily reusable
-function renderForm($id, $name, $email, $username, $role, $error)
+function renderForm($id_, $name_, $email_, $username_, $role_, $error)
 {
-include 'modules/header.php';
+	include 'modules/header.php';
+	echo $username;
 ?>
 	
 <p>
-	<a href="schools.php">Schools</a> ->
-	Edit School
+	<a href="users.php">Users</a> ->
+	Edit User
 </p>
 
 <?php // if there are any errors, display them
@@ -37,22 +38,22 @@ include 'modules/header.php';
 	}
 ?>
 
-<h1>Edit Option</h1>
+<h1>Edit User</h1>
 
-<form name="school" action="" method="post">
-	<input type="hidden" name="id" value="<?= $id ?>" />
+<form name="user" action="" method="post">
+	<input type="text" name="id" value="<?= $id_ ?>" />
 	<table>
 		<tr>
 			<td>Name:</td>
-			<td><input type="text" name="name" maxlength="50" size="50" value="<?= $name ?>" /></td>
+			<td><input type="text" name="name" maxlength="50" size="50" value="<?= $name_ ?>" /></td>
 		</tr>
 		<tr>
 			<td>e-mail:</td>
-			<td><input type="text" name="email" maxlength="50" value="<?= $email ?>" /></td>
+			<td><input type="text" name="email" maxlength="50" value="<?= $email_ ?>" /></td>
 		</tr>
 		<tr>
 			<td>Username:</td>
-			<td><input type="text" name="username" maxlength="50" value="<?= $username ?>" /></td>
+			<td><input type="text" name="username" maxlength="50" value="<?= $username_ ?>" /></td>
 		</tr>
 		<tr>
 			<td>Role:</td>
@@ -60,8 +61,12 @@ include 'modules/header.php';
 				<select name="role">
 					<?PHP
 					include 'modules/constants.php';
-					foreach($roles as $role){
-						echo "<option value='".$role."'>".$role."</option>";
+					foreach($roles as $role1){
+						echo "<option value='".$role1."' ";
+						if ($role1 == $role_) {
+							echo " selected='selected' ";
+						}
+						echo ">".$role1."</option>";
 					}
 					?>
 				</select>
@@ -72,38 +77,7 @@ include 'modules/header.php';
 			<td><input type="submit" value="Register" /></td>
 		</tr>
 	</table>
-	<table>
-		<tr>
-			<td>Name:</td>
-			<td>
-				<input type="text" name="name" maxlength="100" size="50" value="<?= $name ?>" />
-			</td>
-		</tr>
-		<tr>
-			<td>Address:</td>
-			<td>
-				<input type="text" name="address" maxlength="255" size="50" value="<?= $address ?>" />
-			</td>
-		</tr>
-		<tr>
-			<td>City:</td>
-			<td>
-				<input type="text" name="city" maxlength="50" size="30" value="<?= $city ?>" />
-			</td>
-		</tr>
-		<tr>
-			<td>State:</td>
-			<td>
-				<input type="text" name="state" maxlength="2" size="3" value="<?= $state ?>" />
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>
-				<input type="submit" value="Submit" />
-			</td>
-		</tr>
-	</table>
+	
 </form>
 
 <?PHP
@@ -119,9 +93,9 @@ if (isset($_POST['id']))
 		// get form data, making sure it is valid
 		$id = $_POST['id'];
 		$name = $_POST["name"];
-		$address = $_POST["address"];
-		$city = $_POST["city"];
-		$state = $_POST['state'];
+		$email = $_POST["email"];
+		$username = $_POST["username"];
+		$role = $_POST['role'];
 		
 		// check that firstname/lastname fields are both filled in
 		if ($name == '')
@@ -131,16 +105,16 @@ if (isset($_POST['id']))
 			
 			//error, display form
 			//renderForm($id, $name, $code, $subject_id, $error);
-			renderForm($id, $name, $address, $city, $state, $error);
+			renderForm($id, $name, $email, $username, $role, $error);
 		}
 		else
 		{
 			// save the data to the database
-			mysql_query("UPDATE schools SET name='$name', address='$address', city='$city', state='$state' WHERE id='$id'")
+			mysql_query("UPDATE users SET name='$name', email='$email', username='$username', role='$role' WHERE id='$id'")
 			or die(mysql_error());
 			
 			// once saved, redirect back to the view page
-			header("Location: view_school.php?id=".$id);
+			header("Location: view_user.php?id=".$id);
 		}
 	}
 	else
@@ -152,11 +126,11 @@ if (isset($_POST['id']))
 else
 // if the form hasn't been submitted, get the data from the db and display the form
 {
-	$id = $schoolRow["id"];
-	$name = $schoolRow["name"];
-	$address = $schoolRow["address"];
-	$city = $schoolRow["city"];
-	$state = $schoolRow['state'];
-	renderForm($id, $name, $address, $city, $state, $error);
+	//$id = $userRow["id"];
+	//$name = $userRow["name"];
+	//$email = $userRow["email"];
+	//$username = $userRow["username"];
+	//$role = $userRow['role'];
+	renderForm($userRow["id"], $userRow["name"], $userRow["email"], $userRow['username'], $userRow["role"], '');
 }
 ?>

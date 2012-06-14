@@ -114,6 +114,6 @@ else
 	$address = $schoolRow["address"];
 	$city = $schoolRow["city"];
 	$state = $schoolRow['state'];
-	renderForm($id, $name, $address, $city, $state, $error);
+	renderForm($id, $name, $address, $city, $state, '');
 }
 ?>

@@ -20,7 +20,7 @@ else {
 		print "<td>".$row["email"]."</td>";
 		print "<td>".$row["username"]."</td>";
 		print "<td><a href='view_user.php?id=".$row["id"]."'>View</a></td>";
-		print "<td><a href='edit_school.php?id=".$row["id"]."'>Edit</a></td>";
+		print "<td><a href='edit_user.php?id=".$row["id"]."'>Edit</a></td>";
 		print "<td><a href='delete_user.php?id=".$row["id"]."'>Delete</a></td>";
 		print "</tr>\n";
 	}

@@ -84,7 +84,7 @@ if (isset($_POST['grade']))
 else
 // if the form hasn't been submitted, display the form
 {
-	renderForm('', '', $id, $error);
+	renderForm('', '', $id, '');
 }
 ?>
 
