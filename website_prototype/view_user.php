@@ -56,7 +56,6 @@ if (mysql_num_rows($activityResult) < 1) {
 else {
 	$i = 0;
 	print "<table class='listing'>";
-	
 	while(($row = mysql_fetch_array($activityResult)) !== false) {
 		$i++;
 		print "<tr class=\"d".($i & 1)."\">";
@@ -64,12 +63,14 @@ else {
 		print "<td>".$row["start_time"]."</td>";
 		print "<td>".$row["end_time"]."</td>";
 		print "<td>".$row["question_id"]."</td>";
-		print "<td><a href='view_activity.php?id=".$row["id"]."'>View</a></td>";
-		print "<td><a href='edit_activity.php?id=".$row["id"]."'>Edit</a></td>";
+		print "<td>";
+		if ($row["end_time"] == "") {
+			print "<a href='finish_activity.php?id=".$row["id"]."'>Finish Activity</a></td>";	
+		}
 		print "<td><a href='delete_activity.php?id=".$row["id"]."'>Delete</a></td>";
 		print "</tr>\n";
 	}
-	mysql_free_result($groupsResult);
+	mysql_free_result($activityResult);
 	print "</table>";	
 }
 

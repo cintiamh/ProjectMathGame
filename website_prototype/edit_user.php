@@ -24,7 +24,6 @@ if (!$userRow) {
 function renderForm($id_, $name_, $email_, $username_, $role_, $error)
 {
 	include 'modules/header.php';
-	echo $username;
 ?>
 	
 <p>
@@ -41,7 +40,7 @@ function renderForm($id_, $name_, $email_, $username_, $role_, $error)
 <h1>Edit User</h1>
 
 <form name="user" action="" method="post">
-	<input type="text" name="id" value="<?= $id_ ?>" />
+	<input type="hidden" name="id" value="<?= $id_ ?>" />
 	<table>
 		<tr>
 			<td>Name:</td>
