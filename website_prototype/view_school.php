@@ -1,5 +1,6 @@
 <?php
 
+include 'modules/user_validation.php';
 include 'modules/connect_db.php';
 include 'modules/retrieve_school_ids.php';
 
