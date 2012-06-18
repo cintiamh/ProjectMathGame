@@ -1,4 +1,6 @@
 <?PHP
+
+include 'modules/user_validation.php';
 include 'modules/header.php';
 include 'modules/connect_db.php';
 

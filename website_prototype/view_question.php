@@ -1,4 +1,5 @@
 <?PHP
+include 'modules/user_validation.php';
 // Connects to the database
 include 'modules/connect_db.php';
 // Checks the given question id and gets the category id and the subject id from it.

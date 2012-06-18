@@ -4,6 +4,8 @@ NEW.PHP
 Allows user to create a new entry in the database
 */
 
+include 'modules/user_validation.php';
+
 function getSubjectIdValue() {
 	
 }

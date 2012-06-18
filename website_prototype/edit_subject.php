@@ -4,6 +4,8 @@ EDIT.PHP
 Allows user to edit specific entry in database
 */
 
+include 'modules/user_validation.php';
+
 // creates the edit record form
 // since this form is used multiple times in this file, I have made it a function that is easily reusable
 function renderForm($id, $name, $code, $error)

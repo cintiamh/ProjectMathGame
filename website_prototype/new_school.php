@@ -4,6 +4,8 @@ NEW.PHP
 Allows user to create a new entry in the database
 */
 
+include 'modules/user_validation.php';
+
 // creates the new record form
 // since this form is used multiple times in this file, I have made it a function that is easily reusable
 function renderForm($name, $address, $city, $state, $error)

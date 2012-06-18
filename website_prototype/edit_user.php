@@ -4,6 +4,7 @@ EDIT.PHP
 Allows user to edit specific entry in database
 */
 
+include 'modules/user_validation.php';
 include 'modules/connect_db.php';
 
 if (!isset($_GET['id']) || is_null($_GET['id']) || !is_numeric($_GET['id'])) {
