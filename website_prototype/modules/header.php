@@ -1,16 +1,3 @@
-<?PHP
-if(!isset($_SESSION)) { 
-	session_start(); 
-}  
-include 'modules/user_validation.php';
-if (isset($_SESSION['username'])) {
-	$username = $_SESSION['username'];	
-} else {
-	$username = "Guest";
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,10 +24,10 @@ if (isset($_SESSION['username'])) {
     <div id="login_link">
     	<?PHP
     	if (isLoggedIn()) {
-    		echo "Welcome, ". $username. ". ";
+    		echo "Welcome, ". $_SESSION['username']. ". ";
 			echo "Not you? <a href='logout.php'>Logout</a>.";
     	} else {
-    		echo "<a href='register_form.php'>Register</a> or ";
+    		echo "<a href='register.php'>Register</a> or ";
 			echo "<a href='login_form.php'>Sign in</a>";
     	}
     	?>      		

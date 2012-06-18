@@ -1,4 +1,7 @@
 <?PHP
+
+session_start();
+
 function validateUser($user_id, $username) {
 	session_regenerate_id();
 	$_SESSION['valid'] = 1;
