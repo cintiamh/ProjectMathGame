@@ -4,6 +4,8 @@
  Deletes a specific entry from the 'players' table
  */
 
+ include 'modules/user_validation.php';
+ 
 // connect to the database
 include ('modules/connect_db.php');
 include "modules/retrieve_user_ids.php";
