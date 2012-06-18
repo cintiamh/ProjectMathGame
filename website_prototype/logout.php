@@ -1,6 +1,6 @@
 <?PHP
 
-include 'modules/header.php';
+include 'modules/user_validation.php';
 
 logout();
 

@@ -28,7 +28,7 @@
 			echo "Not you? <a href='logout.php'>Logout</a>.";
     	} else {
     		echo "<a href='register.php'>Register</a> or ";
-			echo "<a href='login_form.php'>Sign in</a>";
+			echo "<a href='login.php'>Sign in</a>";
     	}
     	?>      		
       	

@@ -130,7 +130,7 @@ if (isset($_POST['name']))
 		$result = mysql_query($query) or die(mysql_error());
 
 		// once saved, redirect back to the view page
-		header("Location: login_form.php");
+		header("Location: login.php");
 	}
 }
 else
