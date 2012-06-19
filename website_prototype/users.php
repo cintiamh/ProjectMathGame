@@ -35,7 +35,7 @@ else {
 mysql_close();
 ?>
 <p>
-	<a href="register_form.php">New User</a>
+	<a href="register.php">New User</a>
 </p>
 
 

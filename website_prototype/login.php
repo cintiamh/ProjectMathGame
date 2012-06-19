@@ -85,7 +85,7 @@ if (isset($_POST['username']))
 			renderForm($fusername, $error);
 		}
 		else {
-			validateUser($userData['id'], $userData['username']);
+			validateUser($userData['id'], $userData['username'], $userData['role']);
 			//echo $userData['id'];
 			//print_r($userData);
 		}
