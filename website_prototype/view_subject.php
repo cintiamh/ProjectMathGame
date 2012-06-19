@@ -2,6 +2,10 @@
 
 include 'modules/user_validation.php';
 
+if (!isRoleAdmin()) {
+	header("Location: index.php");
+}
+
 if (!isset($_GET['subject_id']) || is_null($_GET['subject_id']) || !is_numeric($_GET['subject_id'])) {
 	header("Location: subjects.php");
 }

@@ -2,12 +2,13 @@
 
 session_start();
 
-function validateUser($user_id, $username, $role) {
+function validateUser($user_id, $username, $role, $school_id) {
 	session_regenerate_id();
 	$_SESSION['valid'] = 1;
 	$_SESSION['userid'] = $user_id;
 	$_SESSION['username'] = $username;
 	$_SESSION['role'] = $role;
+	$_SESSION['schoolid'] = $school_id;
 }
 
 function isLoggedIn() {

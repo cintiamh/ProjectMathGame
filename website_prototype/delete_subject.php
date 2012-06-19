@@ -6,6 +6,10 @@
 
 include 'modules/user_validation.php';
 
+if (!isRoleAdmin()) {
+	header("Location: index.php");
+}
+
  // connect to the database
  include('modules/connect_db.php');
  

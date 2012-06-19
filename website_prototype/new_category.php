@@ -6,6 +6,10 @@ Allows user to create a new entry in the database
 
 include 'modules/user_validation.php';
 
+if (!isRoleAdmin()) {
+	header("Location: index.php");
+}
+
 function getSubjectIdValue() {
 	
 }

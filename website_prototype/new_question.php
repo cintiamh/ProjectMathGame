@@ -5,6 +5,11 @@ Allows user to create a new entry in the database
 */
 
 include 'modules/user_validation.php';
+
+if (!isRoleAdmin()) {
+	header("Location: index.php");
+}
+
 include 'modules/connect_db.php';
 include 'modules/retrieve_category_subject_id.php';
 

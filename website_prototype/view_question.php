@@ -1,5 +1,10 @@
 <?PHP
 include 'modules/user_validation.php';
+
+if (!isRoleAdmin()) {
+	header("Location: index.php");
+}
+
 // Connects to the database
 include 'modules/connect_db.php';
 // Checks the given question id and gets the category id and the subject id from it.

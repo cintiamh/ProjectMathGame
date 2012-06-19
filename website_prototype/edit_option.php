@@ -5,6 +5,11 @@ Allows user to edit specific entry in database
 */
 
 include 'modules/user_validation.php';
+
+if (!isRoleAdmin()) {
+	header("Location: index.php");
+}
+
 include 'modules/connect_db.php';
 include 'modules/retrieve_option_ids.php';
 

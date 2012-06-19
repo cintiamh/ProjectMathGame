@@ -1,6 +1,11 @@
 <?PHP
 
 include 'modules/user_validation.php';
+
+if (!isRoleAdmin()) {
+	header("Location: index.php");
+}
+
 include 'modules/header.php';
 include 'modules/connect_db.php';
 

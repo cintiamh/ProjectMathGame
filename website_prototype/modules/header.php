@@ -43,8 +43,10 @@
   	if (isLoggedIn()) {
   		echo '<a href="view_user.php?id='. $_SESSION['userid']. '" class="green_button">Activities</a>';
   	}
-  	if (isRoleAdmin() || isRoleTeacher()) {
+  	if (isRoleAdmin()) {
   		echo '<a href="subjects.php" class="green_button">Subjects</a>';
+	}
+	if (isRoleAdmin() || isRoleTeacher()) {
   		echo '<a href="schools.php" class="green_button">Schools</a>';
   		echo '<a href="users.php" class="green_button">Users</a>';
   	} 
