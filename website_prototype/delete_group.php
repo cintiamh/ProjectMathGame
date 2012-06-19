@@ -6,6 +6,14 @@
 
  include 'modules/user_validation.php';
  
+if (!isRoleAdmin()) {
+	header("Location: index.php");
+}
+
+if (!isRoleTeacher()) {
+	header("Location: index.php");
+}
+ 
 // connect to the database
 include ('modules/connect_db.php');
 // retrieves and checks question_id, category_id, and subject_id

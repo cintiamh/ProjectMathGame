@@ -2,6 +2,10 @@
 
 include 'modules/user_validation.php';
 
+if (!isLoggedIn()) {
+	header('Location: index.php');
+} 
+
 include 'modules/connect_db.php';
 
 if (!isset($_GET['id']) || is_null($_GET['id']) || !is_numeric($_GET['id'])) {
